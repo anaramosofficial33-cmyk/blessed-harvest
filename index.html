@@ -6,7 +6,24 @@
 <title>Your Prayer Plan — Blessed Harvest</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="The Blessed Harvest 30-Day Prayer Plan: a scripture, a prayer and a reflection for every day.">
-<!-- META PIXEL: colar aqui o código do pixel do Facebook (PageView) quando tiver o ID -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2341936696595662');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'Blessed Harvest 30-Day Prayer Plan', content_type: 'product', currency: 'USD', value: 27});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2341936696595662&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <style>
   :root {
     --bg: #0b0a10;
@@ -203,6 +220,22 @@
     const url = new URL(CHECKOUT[a.dataset.plano]);
     params.forEach((v, k) => url.searchParams.set(k, v));
     a.href = url.toString();
+  });
+
+  // Pixel: clique num valor = InitiateCheckout (com o valor em dólar); espera 300 ms pro evento sair antes de abrir o checkout
+  document.querySelectorAll("[data-plano]").forEach(a => {
+    a.addEventListener("click", ev => {
+      const valor = Number(a.dataset.plano);
+      if (window.fbq) {
+        fbq("track", "InitiateCheckout", {
+          content_name: "Blessed Harvest 30-Day Prayer Plan",
+          content_ids: ["plan-" + valor], content_type: "product",
+          value: valor, currency: "USD", num_items: 1
+        });
+        ev.preventDefault();
+        setTimeout(() => { location.href = a.href; }, 300);
+      }
+    });
   });
 </script>
 </body>
