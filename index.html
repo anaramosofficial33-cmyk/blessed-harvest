@@ -222,12 +222,12 @@ src="https://www.facebook.com/tr?id=2341936696595662&ev=PageView&noscript=1"
     a.href = url.toString();
   });
 
-  // Pixel: clique num valor = InitiateCheckout (com o valor em dólar); espera 300 ms pro evento sair antes de abrir o checkout
+  // Pixel: clique num valor = AddToCart (com o valor em dólar); o InitiateCheckout e o Purchase quem dispara é a CartPanda; espera 300 ms pro evento sair antes de abrir o checkout
   document.querySelectorAll("[data-plano]").forEach(a => {
     a.addEventListener("click", ev => {
       const valor = Number(a.dataset.plano);
       if (window.fbq) {
-        fbq("track", "InitiateCheckout", {
+        fbq("track", "AddToCart", {
           content_name: "Blessed Harvest 30-Day Prayer Plan",
           content_ids: ["plan-" + valor], content_type: "product",
           value: valor, currency: "USD", num_items: 1
